@@ -30,10 +30,3 @@ The application includes the following key features:
 5. **Calculator**: A fully functional calculator supporting basic arithmetic operations.
 6. **Additional Features**: Other utility apps to be integrated for enhancing the functionality of the mobile phone application.
 
-## Setup and Compilation
-1. Ensure you have a C compiler (e.g., GCC) installed on your system.
-2. Clone the repository or download the project files.
-3. Navigate to the project directory.
-4. Compile the code using the following command:
-   ```bash
-   gcc -o mobile_app main.c -lm
