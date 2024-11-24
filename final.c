@@ -1802,8 +1802,8 @@ int main()
             case 3:
             {
                 int choice_1;
-                display();
                 system("cls");
+                display();
                 while (1)
                 {
 
@@ -1841,6 +1841,7 @@ int main()
             break;
             case 4:
             {
+                system("cls");
                 {
                     int found;
                     printf("\n\n\n\n");
