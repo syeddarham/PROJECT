@@ -30,6 +30,9 @@
 
 FILE *todo_fptr;
 FILE *contact_fptr;
+
+// CONACTS
+
 struct contact
 {
     char ph[100], name[20], address[20], email[30];
@@ -38,11 +41,7 @@ struct contact
 char search[20], name[20];
 int i, n, ch, l, found;
 
-struct Login_USER
-{
-    char name[20];
-    char password[20];
-};
+// Boot Animation
 
 void print_boot_logo()
 {
@@ -100,6 +99,14 @@ void boot_animation()
     printf(RESET);
 }
 
+// LOGIN SIGNUP
+
+struct Login_USER
+{
+    char name[20];
+    char password[20];
+};
+
 int Login_Signup()
 {
     struct Login_USER U;
@@ -112,7 +119,7 @@ int Login_Signup()
 
     do
     {
-        printf("\n\n\n" RED "\tMAIN MENU" RESET "\n=======================\n" BLUE "[1] Signup\n[2] Login\n[3] Exit\n" RESET "=======================\n");
+        printf("\n\n\n" RED "\tMAIN MENU" RESET "\n=======================\n" BLUE "[1] Signup\n[2] Login\n[3] Exit" RESET "\n=======================\n");
 
         printf(LIGHT_MAGENTA "Enter Choice: " RESET);
         printf(GREEN);
@@ -169,7 +176,6 @@ int Login_Signup()
             if (ptr1 == NULL || ptr2 == NULL)
             {
                 printf(RED "Error opening files!\n" RESET);
-                return 0;
             }
 
             char temp1[20], temp2[20];
@@ -215,38 +221,6 @@ int Login_Signup()
     } while (choice != 3 && loggedIn != 1);
 
     return loggedIn;
-}
-
-void Login_SignUp()
-{
-    printf("\n\n\n\n");
-    printf(RED);
-    printf("\t===========================================================================================================\n");
-    printf("\t===========================================================================================================\n\n");
-    printf(LIGHT_CYAN);
-    printf("\t LL          OOOOOOO    GGGGGGGG   IIIIIIII   N       N       AAAAAAAA   UUU    UUU  TTTTTTTTTTT  HH    HH\n");
-    printf("\t LL         O       O  GG             II      N N     N       A      A   UUU    UUU      TT       HH    HH\n");
-    printf("\t LL         O       O  GG   GGG       II      N   N   N       AAAAAAAA   UUU    UUU      TT       HHHHHHHH\n");
-    printf("\t LL         O       O  GG    GG       II      N     N N       A      A   UUU    UUU      TT       HH    HH\n");
-    printf("\t LLLLLLLLL   OOOOOOO    GGGGGGGG   IIIIIIII   N       N       A      A    UUUUUUUU       TT       HH    HH\n");
-    printf(RESET);
-    printf("\n");
-    printf(RED);
-    printf("\t===========================================================================================================\n");
-    printf("\t===========================================================================================================\n\n");
-    printf(RESET);
-    system("pause");
-    system("cls");
-    int result = Login_Signup();
-
-    if (result == 1)
-    {
-        printf(GREEN "\nWelcome!\n" RESET);
-    }
-    else if (result == 3)
-    {
-        printf(RED "Exiting...\n" RESET);
-    }
 }
 
 void Auth()
@@ -1868,7 +1842,7 @@ int main()
             case 4:
             {
                 {
-                    int i, n, ch, l, found;
+                    int found;
                     printf("\n\n\n\n");
                     printf(RED);
                     printf("\t=============================================================================================\n");
