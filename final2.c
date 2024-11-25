@@ -123,8 +123,13 @@ int Login_Signup()
 
         printf(LIGHT_MAGENTA "Enter Choice: " RESET);
         printf(GREEN);
-        scanf("%d", &choice);
-        printf(RESET "\n");
+        if (scanf("%d", &choice) != 1)
+        {
+            system("cls");
+            printf(RED "Invalid input. Please enter a number.\n" RESET);
+            fflush(stdin);
+        }
+        printf(RESET);
 
         switch (choice)
         {
@@ -141,13 +146,12 @@ int Login_Signup()
             printf("\n");
             printf(YELLOW "Enter Username: " RESET);
             printf(GREEN);
-            scanf("%s", U.name);
+            scanf("%19s", U.name);
             printf(RESET);
             fprintf(ptr1, "%s\n", U.name);
-
             printf(YELLOW "Enter Password: " RESET);
             printf(GREEN);
-            scanf("%s", U.password);
+            scanf("%19s", U.password);
             printf(RESET);
             fprintf(ptr2, "%s\n", U.password);
 
@@ -162,11 +166,11 @@ int Login_Signup()
             printf(RED "\n NOTE" RESET "\n Inputting Invalid Credentials more than 5 times will lead the PHONE to switch off.\n\n");
             printf(BLUE "Enter Username: " RESET);
             printf(GREEN);
-            scanf("%s", U.name);
+            scanf("%19s", U.name);
             printf(RESET);
             printf(BLUE "Enter Password: " RESET);
             printf(BLACK);
-            scanf("%s", U.password);
+            scanf("%19s", U.password);
             printf(RESET);
             printf("\n");
 
@@ -176,6 +180,7 @@ int Login_Signup()
             if (ptr1 == NULL || ptr2 == NULL)
             {
                 printf(RED "Error opening files!\n" RESET);
+                system("pause");
             }
 
             char temp1[20], temp2[20];
@@ -1690,13 +1695,19 @@ int main()
         while (1)
         {
         main:
+        xaryab:
             system("cls");
-            Interface();
             printf("\n");
+            Interface();
             int choice;
             printf(BLUE "Enter your choice (1-10): " GREEN);
-            scanf("%d", &choice);
-            printf(RESET);
+            if (scanf("%d", &choice) != 1)
+            {
+                system("cls");
+                fflush(stdin);
+                printf(RED "Invalid input. Please enter a number.\n" RESET);
+                goto xaryab;
+            }
             switch (choice)
             {
             case 1:
@@ -2187,7 +2198,15 @@ int main()
                     system("cls");
                     display_cal();
                     printf(CYAN "Enter your choice: " RESET);
-                    scanf("%d", &choice_calc);
+                    printf(GREEN);
+                    if (scanf("%d", &choice_calc) != 1)
+                    {
+                        system("cls");
+                        printf(RED "Invalid input. Please enter a number.\n" RESET);
+                        fflush(stdin);
+                    }
+                    printf(RESET);
+
                     system("cls");
                     switch (choice_calc)
                     {
@@ -2219,7 +2238,15 @@ int main()
                     printf(GREEN "============================================" RED "Welcome to Quiz Games" GREEN "=======================================================\n" LIGHT_RED);
                     printf("Press\n" WHITE);
                     printf(" '1' for Maths Quiz\n '2' for General Knowledge Quiz \n '3' for English Quiz\n '4' for Physics Quiz\n '0' to exit\n  =  ");
-                    scanf("%d", &n);
+                    printf(GREEN);
+                    if (scanf("%d", &n) != 1)
+                    {
+                        system("cls");
+                        printf(RED "Invalid input. Please enter a number.\n" RESET);
+                        fflush(stdin);
+                    }
+                    printf(RESET);
+
                     printf(RESET);
                     system("cls");
                     if (n == 1)
@@ -2342,7 +2369,7 @@ int main()
                 printf("\n\t\t\t[1] SYED ARHAM (LEADER)\n");
                 printf("\t\t\t[2] XARYAB AWAN\n");
                 printf("\t\t\t[3] SAAD NAEEM\n");
-                printf("\t\t\t[4] RIDA BATOOL\n"RESET);
+                printf("\t\t\t[4] RIDA BATOOL\n" RESET);
                 printf(BLUE);
                 system("pause");
                 printf(RESET);
