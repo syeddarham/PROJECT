@@ -275,6 +275,7 @@ void Interface()
     printf("\tX" LIGHT_CYAN "    (7) LUCKY TRIVIA                " YELLOW "X\n");
     printf("\tX" LIGHT_CYAN "    (8) SCRAMBLED JUMBLED           " YELLOW "X\n");
     printf("\tX" LIGHT_CYAN "    (9) Switch OFF                  " YELLOW "X\n");
+    printf("\tX" LIGHT_CYAN "   (10) ABOUT US                    " YELLOW "X\n");
     printf("\tX" LIGHT_CYAN "                                    " YELLOW "X\n");
     printf("\tXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" RESET);
 }
@@ -1693,7 +1694,7 @@ int main()
             Interface();
             printf("\n");
             int choice;
-            printf(BLUE "Enter your choice (1-8): " GREEN);
+            printf(BLUE "Enter your choice (1-10): " GREEN);
             scanf("%d", &choice);
             printf(RESET);
             switch (choice)
@@ -1757,7 +1758,7 @@ int main()
                 }
             }
             case 2:
-            {  
+            {
                 int hour, minute, second;
                 time_t current_time;
                 char input;
@@ -2335,6 +2336,17 @@ int main()
             case 9:
                 printf(RED "\nSwitching Off ...." RESET);
                 exit(0);
+            case 10:
+                system("cls");
+                printf(GREEN "========================================" RED "DEVELOPERS" GREEN "=====================================================\n" LIGHT_RED);
+                printf("\n\t\t\t[1] SYED ARHAM (LEADER)\n");
+                printf("\t\t\t[2] XARYAB AWAN\n");
+                printf("\t\t\t[3] SAAD NAEEM\n");
+                printf("\t\t\t[4] RIDA BATOOL\n"RESET);
+                printf(BLUE);
+                system("pause");
+                printf(RESET);
+                break;
             default:
                 printf(RED "\nInvalid choice.Try Again\n" RESET);
                 system("pause");
