@@ -107,8 +107,7 @@ struct Login_USER
     char password[20];
 };
 
-int Login_Signup()
-{
+int Login_Signup() {
     struct Login_USER U;
     FILE *ptr1, *ptr2;
     int choice;
@@ -117,53 +116,62 @@ int Login_Signup()
 
     printf(YELLOW "\n================================\n\t" CYAN "     WELCOME" YELLOW "\n================================\n\n" RESET);
 
-    do
-    {
+    do {
         printf("\n\n\n" RED "\tMAIN MENU" RESET "\n=======================\n" BLUE "[1] Signup\n[2] Login\n[3] Exit" RESET "\n=======================\n");
 
         printf(LIGHT_MAGENTA "Enter Choice: " RESET);
         printf(GREEN);
-        if (scanf("%d", &choice) != 1)
-        {
-            system("cls");
+        if (scanf("%d", &choice) != 1) {
             printf(RED "Invalid input. Please enter a number.\n" RESET);
             fflush(stdin);
         }
         printf(RESET);
 
-        switch (choice)
-        {
+        switch (choice) {
         case 1:
-            system("cls");
-            ptr1 = fopen("users.txt", "a");
-            ptr2 = fopen("passwords.txt", "a");
+            ptr1 = fopen("users.txt", "a+");
+            ptr2 = fopen("passwords.txt", "a+");
 
-            if (ptr1 == NULL || ptr2 == NULL)
-            {
+            if (ptr1 == NULL || ptr2 == NULL) {
                 printf(RED "Error opening files!\n" RESET);
                 return 0;
             }
-            printf("\n");
+            
             printf(YELLOW "Enter Username: " RESET);
             printf(GREEN);
             scanf("%19s", U.name);
             printf(RESET);
-            fprintf(ptr1, "%s\n", U.name);
-            printf(YELLOW "Enter Password: " RESET);
-            printf(GREEN);
-            scanf("%19s", U.password);
-            printf(RESET);
-            fprintf(ptr2, "%s\n", U.password);
+
+            char temp[20];
+            int found = 0;
+            rewind(ptr1);
+            while (fgets(temp, sizeof(temp), ptr1) != NULL) {
+                temp[strcspn(temp, "\n")] = 0;
+                if (strcmp(U.name, temp) == 0) {
+                    printf(RED "\nUsername already exists. Please choose a different username.\n" RESET);
+                    found = 1;
+                    break;
+                }
+            }
+
+            if (!found) {
+                printf(YELLOW "Enter Password: " RESET);
+                printf(GREEN);
+                scanf("%19s", U.password);
+                printf(RESET);
+
+                fprintf(ptr1, "%s\n", U.name);
+                fprintf(ptr2, "%s\n", U.password);
+
+                printf(GREEN "\nSignup successful!\n" RESET);
+            }
 
             fclose(ptr1);
             fclose(ptr2);
-
-            printf(GREEN "\nSignup successful!\n" RESET);
             break;
 
         case 2:
-            system("cls");
-            printf(RED "\n NOTE" RESET "\n Inputting Invalid Credentials more than 5 times will lead the PHONE to switch off.\n\n");
+            printf(RED "\n NOTE" RESET "\n Inputting Invalid Credentials more than 5 times will lead to exit.\n\n");
             printf(BLUE "Enter Username: " RESET);
             printf(GREEN);
             scanf("%19s", U.name);
@@ -177,22 +185,19 @@ int Login_Signup()
             ptr1 = fopen("users.txt", "r");
             ptr2 = fopen("passwords.txt", "r");
 
-            if (ptr1 == NULL || ptr2 == NULL)
-            {
+            if (ptr1 == NULL || ptr2 == NULL) {
                 printf(RED "Error opening files!\n" RESET);
-                system("pause");
+                break;
             }
 
             char temp1[20], temp2[20];
-            int found = 0;
+            found = 0;
 
-            while (fgets(temp1, sizeof(temp1), ptr1) != NULL && fgets(temp2, sizeof(temp2), ptr2) != NULL)
-            {
+            while (fgets(temp1, sizeof(temp1), ptr1) != NULL && fgets(temp2, sizeof(temp2), ptr2) != NULL) {
                 temp1[strcspn(temp1, "\n")] = 0;
                 temp2[strcspn(temp2, "\n")] = 0;
 
-                if (strcmp(U.name, temp1) == 0 && strcmp(U.password, temp2) == 0)
-                {
+                if (strcmp(U.name, temp1) == 0 && strcmp(U.password, temp2) == 0) {
                     printf(GREEN "\nLogged in successfully!\n" RESET);
                     found = 1;
                     loggedIn = 1;
@@ -203,12 +208,10 @@ int Login_Signup()
             fclose(ptr1);
             fclose(ptr2);
 
-            if (!found)
-            {
+            if (!found) {
                 attempts++;
-                if (attempts >= 5)
-                {
-                    printf(RED "\nPhone Switched Off\n" RESET);
+                if (attempts >= 5) {
+                    printf(RED "\nToo many failed attempts. Exiting.\n" RESET);
                     exit(0);
                 }
                 printf(RED "\nInvalid username or password. Attempts left: %d\n" RESET, 5 - attempts);
@@ -227,6 +230,8 @@ int Login_Signup()
 
     return loggedIn;
 }
+
+
 
 void Auth()
 {
